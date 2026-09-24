@@ -1,9 +1,10 @@
-import type { Project } from "@/lib/data";
+import type { Institution } from "@/content/site";
 
-// Placeholder cover art built from the project's tones. Swap for real
-// imagery (next/image) once project photography is available.
-export function ProjectVisual({ project, large = false }: { project: Project; large?: boolean }) {
-  const [a, b] = project.tones;
+// Placeholder cover art built from the institution's tones. Swap for real
+// photography (next/image) once it is available.
+export function InstitutionVisual({ institution, large = false }: { institution: Institution; large?: boolean }) {
+  const [a, b] = institution.tones;
+  const host = institution.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
   return (
     <div
       className="relative h-full w-full overflow-hidden"
@@ -27,23 +28,23 @@ export function ProjectVisual({ project, large = false }: { project: Project; la
           <span className="h-2 w-2 rounded-full bg-ink/15" />
           <span className="h-2 w-2 rounded-full bg-ink/15" />
           <span className="h-2 w-2 rounded-full bg-ink/15" />
+          <span className="ml-2 truncate rounded-full bg-ink/[0.05] px-2.5 py-0.5 text-[0.7rem] font-medium text-ink/50">
+            {host}
+          </span>
         </div>
         <div className="flex items-center gap-3">
           <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-ink text-lg font-extrabold text-stone-paper md:h-12 md:w-12">
-            {project.glyph}
+            {institution.glyph}
           </div>
-          <div className="flex-1 space-y-2">
-            <div className="h-2.5 w-3/4 rounded-full bg-ink/80" />
-            <div className="h-2 w-1/2 rounded-full bg-ink/15" />
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-bold tracking-tight md:text-base">{institution.shortName}</p>
+            <p className="truncate text-xs text-muted">{institution.category}</p>
           </div>
         </div>
-        <div className="mt-5 grid grid-cols-3 gap-2">
-          {project.results.map((r) => (
-            <div key={r.label} className="rounded-lg bg-ink/[0.04] px-2 py-2.5">
-              <div className="text-sm font-bold tracking-tight md:text-base">{r.value}</div>
-              <div className="mt-1 h-1.5 w-2/3 rounded-full bg-ink/10" />
-            </div>
-          ))}
+        <div className="mt-5 space-y-2">
+          <div className="h-2 w-full rounded-full bg-ink/10" />
+          <div className="h-2 w-4/5 rounded-full bg-ink/10" />
+          <div className="h-2 w-3/5 rounded-full bg-ink/10" />
         </div>
       </div>
     </div>

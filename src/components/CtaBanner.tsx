@@ -3,8 +3,8 @@ import { Reveal } from "./Reveal";
 import { Cairn } from "./Cairn";
 
 export function CtaBanner({
-  title = "Let's build learning that lasts.",
-  body = "Tell us about your learners and what you want to change. We'll reply within two working days.",
+  title = "Let's talk about learning.",
+  body = "Admissions, partnerships, media or speaking invitations. Tell us what you need and we'll point you to the right team.",
 }: {
   title?: string;
   body?: string;
@@ -17,10 +17,10 @@ export function CtaBanner({
           <p className="mt-6 max-w-lg text-lg text-ink-soft">{body}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Button href="/contact" size="lg" arrow>
-              Start a project
+              Contact us
             </Button>
-            <Button href="/work" size="lg" variant="outline">
-              See our work
+            <Button href="/institutions" size="lg" variant="outline">
+              Explore our institutions
             </Button>
           </div>
         </div>

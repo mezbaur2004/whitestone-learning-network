@@ -1,26 +1,29 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
-import { Rating } from "@/components/Rating";
+import { FounderBadge } from "@/components/FounderBadge";
 import { Reveal } from "@/components/Reveal";
-import { site, socials } from "@/lib/data";
+import { ArrowUpRight } from "@/components/icons";
+import { institutions, site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Start a project with Whitestone Learning Network.",
+  description:
+    "Contact Whitestone Learning Network in Dhaka about admissions, courses, resources, partnerships, media or speaking invitations for Abdullah Jaman.",
+  alternates: { canonical: "/contact" },
 };
 
 const faqs = [
   {
-    q: "What kinds of organisations do you work with?",
-    a: "Schools, universities, foundations, and companies with learning programs for staff or customers.",
+    q: "How do I apply to Wheaton or Guidance International School?",
+    a: "Admissions are handled by each school directly. Please use the school's own website for admission dates, fees and forms.",
   },
   {
-    q: "How long does a typical project take?",
-    a: "Most programs and platforms take 8–20 weeks from first conversation to launch, depending on scope.",
+    q: "Where do I sign in to Pedago Academy or order from Jolly Learning BD?",
+    a: "On their own websites. This site introduces the Whitestone family; it doesn't handle logins, courses or orders.",
   },
   {
-    q: "Can you work with our existing tools?",
-    a: "Yes. We often design around the systems you already have, and only recommend new tools when they clearly help.",
+    q: "How can I invite Abdullah Jaman to speak?",
+    a: "Choose “Speaking invitation for Abdullah Jaman” in the form and tell us about your event, audience and date.",
   },
 ];
 
@@ -32,7 +35,13 @@ export default function ContactPage() {
           <p className="eyebrow">Contact</p>
         </Reveal>
         <Reveal delay={80}>
-          <h1 className="display mt-6 max-w-4xl text-5xl md:text-7xl xl:text-[5.5rem]">Let&rsquo;s start something lasting</h1>
+          <h1 className="display mt-6 max-w-4xl text-5xl md:text-7xl xl:text-[5.5rem]">How can we help?</h1>
+        </Reveal>
+        <Reveal delay={160}>
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">
+            Tell us what you need and we&rsquo;ll point you to the right team. For admissions, courses and orders, each
+            institution&rsquo;s own website is the quickest route.
+          </p>
         </Reveal>
       </section>
 
@@ -42,41 +51,79 @@ export default function ContactPage() {
         </Reveal>
 
         <div className="space-y-4">
-          <Reveal delay={100} className="rounded-[28px] bg-ink p-8 text-stone-paper md:p-10">
-            <p className="text-sm text-stone-paper/60">Email us</p>
-            <a href={`mailto:${site.email}`} className="mt-2 block break-words text-2xl font-semibold tracking-tight hover:underline">
-              {site.email}
-            </a>
-            <p className="mt-8 text-sm text-stone-paper/60">Call us</p>
-            <a href={`tel:${site.phone.replace(/[^+\d]/g, "")}`} className="mt-2 block text-2xl font-semibold tracking-tight hover:underline">
-              {site.phone}
-            </a>
+          {(site.email || site.phone) && (
+            <Reveal delay={100} className="rounded-[28px] bg-ink p-8 text-stone-paper md:p-10">
+              {site.email && (
+                <>
+                  <p className="text-sm text-stone-paper/60">Email us</p>
+                  <a href={`mailto:${site.email}`} className="mt-2 block break-words text-2xl font-semibold tracking-tight hover:underline">
+                    {site.email}
+                  </a>
+                </>
+              )}
+              {site.phone && (
+                <>
+                  <p className={`text-sm text-stone-paper/60 ${site.email ? "mt-8" : ""}`}>Call us</p>
+                  <a href={`tel:${site.phone.replace(/[^+\d]/g, "")}`} className="mt-2 block text-2xl font-semibold tracking-tight hover:underline">
+                    {site.phone}
+                  </a>
+                </>
+              )}
+            </Reveal>
+          )}
+
+          <Reveal delay={140} className="rounded-[28px] bg-stone-paper/70 p-8 ring-1 ring-ink/5 md:p-10">
+            <p className="text-sm text-muted">Go direct</p>
+            <ul className="mt-4 divide-y divide-line">
+              {institutions.map((inst) => (
+                <li key={inst.slug}>
+                  <a
+                    href={inst.enquiryUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between gap-4 py-3"
+                  >
+                    <span>
+                      <span className="block font-semibold tracking-tight">{inst.name}</span>
+                      <span className="text-sm text-muted">{inst.category}</span>
+                    </span>
+                    <ArrowUpRight className="h-4 w-4 shrink-0 opacity-50 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </Reveal>
 
-          <Reveal delay={160} className="rounded-[28px] bg-stone-paper/70 p-8 ring-1 ring-ink/5 md:p-10">
-            <p className="text-sm text-muted">Visit</p>
-            <p className="mt-2 text-xl font-semibold leading-snug tracking-tight">
-              {site.address}
-              <br />
-              {site.city}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full px-4 py-2 text-sm font-medium ring-1 ring-ink/10 transition-colors hover:bg-ink hover:text-stone-paper"
-                >
-                  {s.label}
-                </a>
-              ))}
-            </div>
+          <Reveal delay={180} className="rounded-[28px] bg-stone-paper/70 p-8 ring-1 ring-ink/5 md:p-10">
+            <p className="text-sm text-muted">Office</p>
+            <address className="mt-2 text-xl font-semibold not-italic leading-snug tracking-tight">
+              {site.officeAddress && (
+                <>
+                  {site.officeAddress}
+                  <br />
+                </>
+              )}
+              {site.city}, {site.country}
+            </address>
+            {site.socials.length > 0 && (
+              <div className="mt-8 flex flex-wrap gap-2">
+                {site.socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full px-4 py-2 text-sm font-medium ring-1 ring-ink/10 transition-colors hover:bg-ink hover:text-stone-paper"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            )}
           </Reveal>
 
           <Reveal delay={220} className="rounded-[28px] bg-stone-paper/70 p-8 ring-1 ring-ink/5">
-            <Rating />
+            <FounderBadge />
           </Reveal>
         </div>
       </section>
