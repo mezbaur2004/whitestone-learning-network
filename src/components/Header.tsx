@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav, site, socials } from "@/lib/data";
+import { nav, site } from "@/content/site";
 import { Logo } from "./Logo";
 import { ArrowUpRight } from "./icons";
 
@@ -61,7 +61,7 @@ export function Header() {
               href="/contact"
               className="hidden h-12 items-center rounded-full bg-ink px-6 text-[0.95rem] font-semibold text-stone-paper transition-colors hover:bg-ink-soft lg:inline-flex"
             >
-              Contact Us
+              Contact us
             </Link>
             <button
               type="button"
@@ -122,16 +122,23 @@ export function Header() {
             </ul>
           </nav>
           <div className="space-y-4 text-ink-soft">
-            <a href={`mailto:${site.email}`} className="block text-xl font-semibold text-ink">
-              {site.email}
-            </a>
-            <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-              {socials.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="hover:text-ink">
-                  {s.label}
-                </a>
-              ))}
-            </div>
+            {site.email && (
+              <a href={`mailto:${site.email}`} className="block text-xl font-semibold text-ink">
+                {site.email}
+              </a>
+            )}
+            {site.socials.length > 0 && (
+              <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                {site.socials.map((s) => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-ink">
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            )}
+            <p className="text-sm">
+              {site.city}, {site.country}
+            </p>
           </div>
         </div>
       </div>
