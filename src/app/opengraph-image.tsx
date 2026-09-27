@@ -22,7 +22,15 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40, fontWeight: 800, letterSpacing: -2 }}>
-          <div style={{ width: 44, height: 44, borderRadius: "58% 42% 55% 45% / 48% 60% 40% 52%", background: "#0f1012" }} />
+          <div
+            style={{
+              width: 44,
+              height: 44,
+              borderRadius: "58% 42% 55% 45% / 48% 60% 40% 52%",
+              background: "radial-gradient(circle at 35% 28%, #ffffff 0%, #f1f2f3 45%, #cfd2d6 100%)",
+              border: "1px solid rgba(15,16,18,0.2)",
+            }}
+          />
           whitestone
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
