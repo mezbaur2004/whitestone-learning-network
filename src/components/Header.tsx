@@ -36,7 +36,7 @@ export function Header() {
     <>
       <header
         className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
-          scrolled || open ? "border-line bg-stone-base/80 backdrop-blur-xl" : "border-line bg-transparent"
+          scrolled || open ? "border-line bg-stone-deep/90 backdrop-blur-xl" : "border-line bg-stone-deep/70"
         }`}
       >
         <div className="container-x flex h-20 items-center justify-between md:h-24">
