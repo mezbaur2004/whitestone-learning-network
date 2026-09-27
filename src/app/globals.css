@@ -18,6 +18,8 @@
 
   --animate-marquee: marquee 38s linear infinite;
   --animate-float: float 14s ease-in-out infinite;
+  /* Background blobs: translate only, so the compositor just moves a cached layer. */
+  --animate-drift: drift 14s ease-in-out infinite;
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -27,6 +29,11 @@
   @keyframes float {
     0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
     50% { transform: translate3d(0, -18px, 0) rotate(3deg); }
+  }
+
+  @keyframes drift {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -18px, 0); }
   }
 }
 
@@ -106,7 +113,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .animate-marquee, .animate-float { animation: none !important; }
+  .animate-marquee, .animate-float, .animate-drift { animation: none !important; }
+}
+
+/* StoneBackground adds this while the tab is hidden. */
+.stone-bg.is-paused .animate-drift {
+  animation-play-state: paused;
 }
 
 @keyframes fadeUp {
